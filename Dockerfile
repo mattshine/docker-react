@@ -1,10 +1,10 @@
 # Install dependencies and run npm run build
 # as builder lets everything after this FROM run as the builder phase
-FROM node:alpine as builder 
+FROM node:alpine
 
 WORKDIR '/app'
 
-COPY package.json .
+COPY package.json ./
 RUN npm install
 COPY . .
 
@@ -14,4 +14,4 @@ FROM nginx
 EXPOSE 80
 
 # --from so we can copy the output files from a different stage
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=0 /app/build /usr/share/nginx/html
