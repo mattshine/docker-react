@@ -7,6 +7,7 @@ WORKDIR '/app'
 COPY package.json ./
 RUN npm install
 COPY . .
+RUN npm run build
 
 # /app/build has all the content we care about that we want to copy over to the run phase
 # this means the previous block is done, we don't need another as object to define it
